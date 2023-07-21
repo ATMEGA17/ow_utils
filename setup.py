@@ -19,5 +19,33 @@ if sys.argv[-1] == 'publish':
 
 
 setup(
-
+    install_requires=[
+        'django-model-utils~=4.3.1',
+        'django-compress-staticfiles~=1.0.1b',
+        'django-admin-autocomplete-filter~=0.7.1',
+        'swapper~=1.3.0',
+    ],
+    extras_require={
+        'qa': [
+            'black~=22.3.0',
+            'flake8<=3.9',
+            'isort~=5.0',
+            'readme-renderer~=28.0',
+            'coveralls~=3.0.0',  # depends on coverage as well
+            'tblib~=1.7',
+        ],
+        'rest': [
+            'djangorestframework~=3.14.0',
+            'django-filter~=23.2',  # django-filter uses CalVer
+            # The coreapi package is archived and all packages
+            # are moving away from coreapi (e.g. DRF, django-filter, drf-yasg).
+            # There's already an open PR in drf-yasg
+            # https://github.com/axnsan12/drf-yasg/pull/857.
+            # TODO: Before releasing, check if newer version
+            # of drf-yasg is available.
+            'drf-yasg[coreapi]~=1.21.0',
+        ],
+        'celery': ['celery~=5.3.0'],
+        'selenium': ['selenium~=4.10.0'],
+    },
 )
