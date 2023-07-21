@@ -19,6 +19,19 @@ if sys.argv[-1] == 'publish':
 
 
 setup(
+    platforms=['Platform Independent'],
+    keywords=['django', 'netjson', 'openwrt', 'networking', 'openwisp'],
+    packages=find_packages(exclude=['tests*', 'docs*']),
+    include_package_data=True,
+    entry_points={
+        'console_scripts': [
+            'checkmigrations = openwisp_utils.qa:check_migration_name',
+            'checkcommit = openwisp_utils.qa:check_commit_message',
+            'checkrst = openwisp_utils.qa:check_rst_files',
+        ]
+    },
+    scripts=['openwisp-qa-check', 'openwisp-qa-format', 'openwisp-pre-push-hook'],
+    zip_safe=False,
     install_requires=[
         'django-model-utils~=4.3.1',
         'django-compress-staticfiles~=1.0.1b',
@@ -48,4 +61,15 @@ setup(
         'celery': ['celery~=5.3.0'],
         'selenium': ['selenium~=4.10.0'],
     },
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Environment :: Web Environment',
+        'Topic :: Internet :: WWW/HTTP',
+        'Topic :: System :: Networking',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: BSD License',
+        'Operating System :: OS Independent',
+        'Framework :: Django',
+        'Programming Language :: Python :: 3',
+    ],
 )
